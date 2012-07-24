@@ -6,29 +6,38 @@ from Ball import Ball
 
 numberOfBalls = 1
 
-pygame.init()
-screen = pygame.display.set_mode([800, 600])
-clock = pygame.time.Clock()
+class Main:
+        def init(self):
+                pygame.init()
+                self.screen = pygame.display.set_mode([800, 600])
+                self.clock = pygame.time.Clock()
 
-balls = []
+                balls = []
+                for x in range(numberOfBalls):
+                        balls.append(Ball(self.screen.get_size()))
 
-for x in range(numberOfBalls):
-        balls.append(Ball(screen.get_size()))
+                self.objects = []
+                self.objects.extend(balls)
+                
+                self.allsprites = pygame.sprite.RenderPlain(self.objects)
 
-allsprites = pygame.sprite.RenderPlain(balls)
+                self.background = pygame.Surface(self.screen.get_size()).convert()
+                self.background.fill((250, 250, 250))
 
-background = pygame.Surface(screen.get_size()).convert()
-background.fill((250, 250, 250))
+        def run(self):
+                running = True
 
-running = True
+                while running:
+                        for event in pygame.event.get():
+                                if event.type == pygame.QUIT: 
+                                        running = False
+                        self.allsprites.update()
+                        self.screen.blit(self.background, (0, 0))
+                        self.allsprites.draw(self.screen)
+                        pygame.display.flip()
+                        self.clock.tick(60)
 
-while running:
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT: 
-                        running = False
-        allsprites.update()
-        screen.blit(background, (0, 0))
-        allsprites.draw(screen)
-        pygame.display.flip()
-        clock.tick(60)
+game = Main()
+game.init()
+game.run()
 
