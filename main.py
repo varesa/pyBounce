@@ -14,7 +14,7 @@ class Main:
 
                 balls = []
                 for x in range(numberOfBalls):
-                        balls.append(Ball(self.screen.get_size()))
+                        balls.append(Ball(self))
 
                 self.objects = []
                 self.objects.extend(balls)
