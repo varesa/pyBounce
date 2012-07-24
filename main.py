@@ -30,4 +30,5 @@ while running:
         screen.blit(background, (0, 0))
         allsprites.draw(screen)
         pygame.display.flip()
+        clock.tick(60)
 
